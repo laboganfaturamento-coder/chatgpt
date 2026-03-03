@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Devocional Quest</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>🔥 Devocional Quest</h1>
+      <p>Construa sua rotina, evolua no rank e cuide do seu pet bíblico.</p>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>📅 Sequência Devocional</h2>
+        <div class="stats-row">
+          <div>
+            <strong>Dias concluídos:</strong>
+            <span id="completedDays">0</span>
+          </div>
+          <div>
+            <strong>Streak atual:</strong>
+            <span id="streak">0</span> 🔥
+          </div>
+        </div>
+        <button id="completeDevotionalBtn">Marcar devocional de hoje</button>
+        <p id="dayStatus" class="hint"></p>
+      </section>
+
+      <section class="card">
+        <h2>🏆 XP e Rank</h2>
+        <div class="stats-row">
+          <div><strong>XP:</strong> <span id="xp">0</span></div>
+          <div><strong>Rank:</strong> <span id="rank">Bronze</span></div>
+        </div>
+        <div class="progress-container">
+          <div id="xpBar" class="progress-bar"></div>
+        </div>
+        <p id="nextRank" class="hint"></p>
+      </section>
+
+      <section class="card">
+        <h2>🤖 Conselheiro Bíblico (IA)</h2>
+        <p class="hint">Faça perguntas como: "meu relacionamento está ruim".</p>
+        <textarea id="userQuestion" rows="4" placeholder="Escreva sua pergunta..."></textarea>
+        <button id="askAiBtn">Perguntar</button>
+        <div id="aiResponse" class="response-box"></div>
+      </section>
+
+      <section class="card two-columns">
+        <div>
+          <h2>👤 Perfil</h2>
+          <label>Nome
+            <input id="profileName" type="text" placeholder="Seu nome" />
+          </label>
+          <label>Bio
+            <textarea id="profileBio" rows="3" placeholder="Quem é você na fé?"></textarea>
+          </label>
+          <button id="saveProfileBtn">Salvar perfil</button>
+        </div>
+
+        <div>
+          <h2>🐑 Pet Bíblico</h2>
+          <label>Nome do pet
+            <input id="petName" type="text" placeholder="Ex: Manna" />
+          </label>
+          <label>Espécie bíblica
+            <select id="petType">
+              <option value="Cordeiro">Cordeiro</option>
+              <option value="Pomba">Pomba</option>
+              <option value="Leão">Leão</option>
+              <option value="Peixe">Peixe</option>
+            </select>
+          </label>
+          <label>Acessório
+            <input id="petAccessory" type="text" placeholder="Ex: Coroa de louvor" />
+          </label>
+          <button id="savePetBtn">Salvar pet</button>
+          <p id="petPreview" class="hint"></p>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
