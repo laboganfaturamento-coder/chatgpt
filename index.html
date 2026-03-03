@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adoray Devocional</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="onboarding" class="onboarding hidden">
+      <div class="onboarding-card glass">
+        <h2>✨ Antes de começar</h2>
+        <p>Responda para personalizar seu devocional.</p>
+
+        <div class="q-block">
+          <h3>1) Quanto tempo você quer dedicar ao devocional por dia?</h3>
+          <label><input type="radio" name="q1" value="5 a 10 minutos" />5 a 10 minutos</label>
+          <label><input type="radio" name="q1" value="10 a 20 minutos" />10 a 20 minutos</label>
+          <label><input type="radio" name="q1" value="20 a 30 minutos" />20 a 30 minutos</label>
+          <label><input type="radio" name="q1" value="30+ minutos" />30+ minutos</label>
+        </div>
+
+        <div class="q-block">
+          <h3>2) Qual é seu objetivo neste momento? <small>(pode marcar mais de um)</small></h3>
+          <label><input type="checkbox" name="q2" value="Criar o hábito diário" />Criar o hábito diário</label>
+          <label><input type="checkbox" name="q2" value="Aprofundar minha fé" />Aprofundar minha fé</label>
+          <label><input type="checkbox" name="q2" value="Encontrar paz / reduzir ansiedade" />Encontrar paz / reduzir ansiedade</label>
+          <label><input type="checkbox" name="q2" value="Entender melhor a Bíblia" />Entender melhor a Bíblia</label>
+          <label><input type="checkbox" name="q2" value="Outro" />Outro</label>
+        </div>
+
+        <div class="q-block">
+          <h3>3) Com que frequência você quer fazer o devocional?</h3>
+          <label><input type="radio" name="q3" value="Todos os dias" />Todos os dias</label>
+          <label><input type="radio" name="q3" value="Algumas vezes por semana" />Algumas vezes por semana</label>
+          <label><input type="radio" name="q3" value="Apenas quando eu precisar" />Apenas quando eu precisar</label>
+        </div>
+
+        <div class="q-block">
+          <h3>4) Você quer receber lembretes?</h3>
+          <label><input type="radio" name="q4" value="Sim (escolher horário)" />Sim (escolher horário)</label>
+          <label><input type="radio" name="q4" value="Não" />Não</label>
+        </div>
+
+        <div class="q-block">
+          <h3>5) Como você descreveria sua jornada espiritual?</h3>
+          <label><input type="radio" name="q5" value="Estou começando agora" />Estou começando agora</label>
+          <label><input type="radio" name="q5" value="Já tenho o hábito de ler a Bíblia" />Já tenho o hábito de ler a Bíblia</label>
+          <label><input type="radio" name="q5" value="Quero retomar minha caminhada" />Quero retomar minha caminhada</label>
+        </div>
+
+        <div class="q-block">
+          <h3>6) Quais temas te interessam mais? <small>(pode marcar mais de um)</small></h3>
+          <label><input type="checkbox" name="q6" value="Fé" />Fé</label>
+          <label><input type="checkbox" name="q6" value="Ansiedade" />Ansiedade</label>
+          <label><input type="checkbox" name="q6" value="Propósito" />Propósito</label>
+          <label><input type="checkbox" name="q6" value="Relacionamentos" />Relacionamentos</label>
+          <label><input type="checkbox" name="q6" value="Gratidão" />Gratidão</label>
+          <label><input type="checkbox" name="q6" value="Perdão" />Perdão</label>
+        </div>
+
+        <p id="onboardingStatus" class="hint"></p>
+        <button id="saveOnboardingBtn">Começar minha jornada</button>
+      </div>
+    </div>
+
+    <div id="appRoot" class="app-shell hidden">
+      <header class="topbar glass">
+        <div>
+          <h1 class="animated-title">📖 Adoray Devocional</h1>
+          <p>Estudo bíblico em trilha gamificada</p>
+        </div>
+        <button id="themeToggleBtn" class="ghost-btn">🌙/☀️</button>
+      </header>
+
+      <main>
+        <section id="tab-inicio" class="tab active">
+          <div class="hero card gradient">
+            <h2>Seu caminho devocional em formato de jogo</h2>
+            <p>Complete os devocionais da trilha e mantenha seu fogo aceso.</p>
+            <div class="hero-badges">
+              <span>🔥 <strong id="homeStreak">0</strong></span>
+              <span>⭐ <strong id="homeXp">0</strong> XP</span>
+              <span>🏅 <strong id="homeRank">Bronze</strong></span>
+            </div>
+          </div>
+
+          <div class="card glass">
+            <h3>🐑 Pet de estudo</h3>
+            <p id="petDisplay"></p>
+            <div class="progress-wrap"><div id="petProgress" class="progress"></div></div>
+          </div>
+
+          <div class="card glass">
+            <h3>🛤️ Trilha de devocionais</h3>
+            <p class="hint">Passe por cada etapa para avançar na jornada.</p>
+            <div id="devotionalTrail" class="trail"></div>
+            <p id="trailStatus" class="hint"></p>
+          </div>
+        </section>
+
+        <section id="tab-biblia" class="tab">
+          <div class="card glass">
+            <h2>📚 Bíblia</h2>
+            <label>Versão bíblica
+              <select id="bibleVersion">
+                <option value="ARA">Almeida Revista e Atualizada (ARA)</option>
+                <option value="KJV">King James Version (KJV)</option>
+                <option value="NIV">New International Version (NIV)</option>
+                <option value="NLT">New Living Translation (NLT)</option>
+              </select>
+            </label>
+            <p class="hint">Versão selecionada: <strong id="selectedVersion">ARA</strong></p>
+          </div>
+          <div class="card glass">
+            <h3>🗂️ Planos de leitura</h3>
+            <ul class="plans">
+              <li>Cronológico da Bíblia</li>
+              <li>Evangelhos em 30 dias</li>
+              <li>Salmos e Provérbios</li>
+              <li>Mulheres da Bíblia</li>
+              <li>Homens de Fé</li>
+              <li>Esperança e paz</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="tab-ia" class="tab">
+          <div class="card glass">
+            <h2>💬 IA Bíblica</h2>
+            <textarea id="chatInput" rows="4" placeholder="Ex: meu relacionamento está ruim, o que eu faço?"></textarea>
+            <button id="sendChatBtn">Perguntar</button>
+            <div id="chatOutput" class="chat-output"></div>
+          </div>
+        </section>
+
+        <section id="tab-rank" class="tab">
+          <div class="card glass">
+            <h2>🏆 Rank</h2>
+            <div class="rank-line"><span>XP total</span><strong id="rankXp">0</strong></div>
+            <div class="rank-line"><span>Rank atual</span><strong id="rankName">Bronze</strong></div>
+            <div class="progress-wrap"><div id="rankProgress" class="progress"></div></div>
+            <p id="rankHint" class="hint"></p>
+          </div>
+        </section>
+
+        <section id="tab-perfil" class="tab">
+          <div class="card glass">
+            <h2>👤 Perfil</h2>
+            <label>Nome <input id="profileName" type="text" /></label>
+            <label>Bio <textarea id="profileBio" rows="3"></textarea></label>
+            <button id="saveProfileBtn">Salvar perfil</button>
+          </div>
+          <div class="card glass">
+            <h3>🐾 Editar pet</h3>
+            <label>Nome <input id="petName" type="text" /></label>
+            <label>Espécie
+              <select id="petType">
+                <option value="Cordeiro">Cordeiro</option>
+                <option value="Pomba">Pomba</option>
+                <option value="Leão">Leão</option>
+                <option value="Peixe">Peixe</option>
+              </select>
+            </label>
+            <label>Acessório <input id="petAccessory" type="text" /></label>
+            <button id="savePetBtn">Salvar pet</button>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav glass">
+        <button class="nav-btn active" data-tab="inicio">🏠<span>Início</span></button>
+        <button class="nav-btn" data-tab="biblia">📖<span>Bíblia</span></button>
+        <button class="nav-btn" data-tab="ia">💬<span>IA</span></button>
+        <button class="nav-btn" data-tab="rank">🏅<span>Rank</span></button>
+        <button class="nav-btn" data-tab="perfil">👤<span>Perfil</span></button>
+      </nav>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
