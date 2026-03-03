@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adoray Devocional</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="onboarding" class="onboarding hidden">
+      <div class="onboarding-card glass">
+        <h2>✨ Vamos montar sua jornada</h2>
+        <p id="onboardingStepLabel">Pergunta 1 de 6</p>
+        <div class="stepper"><div id="stepperFill" class="stepper-fill"></div></div>
+        <div id="questionContainer"></div>
+        <p id="onboardingStatus" class="hint"></p>
+        <div class="onboarding-actions">
+          <button id="prevQuestionBtn" class="ghost-btn">Voltar</button>
+          <button id="nextQuestionBtn">Próximo</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="appRoot" class="app-shell hidden">
+      <header class="topbar glass">
+        <div>
+          <h1 class="animated-title">📖 Adoray Devocional</h1>
+          <p>Inovação espiritual com IA, áudio e gamificação</p>
+        </div>
+        <button id="themeToggleBtn" class="ghost-btn">🌙/☀️</button>
+      </header>
+
+      <main>
+        <section id="tab-inicio" class="tab active">
+          <div class="hero card gradient">
+            <h2>Devocional Diário Inteligente</h2>
+            <div class="hero-badges">
+              <span>🔥 <strong id="homeStreak">0</strong></span>
+              <span>⭐ <strong id="homeXp">0</strong> XP</span>
+              <span>🪙 <strong id="homeCoins">0</strong></span>
+              <span>❤️ <strong id="homeHearts">3</strong></span>
+              <span>🏅 <strong id="homeRank">Bronze</strong></span>
+            </div>
+          </div>
+
+          <div class="card glass premium-card">
+            <h3>💎 Premium</h3>
+            <p id="premiumStatus" class="hint"></p>
+            <button id="buyPremiumBtn">Ativar Premium (500 moedas)</button>
+            <p class="hint">No Premium você não perde vida ao errar lições.</p>
+          </div>
+
+          <div class="card glass">
+            <h3>🧠 Devocional Inteligente</h3>
+            <label>Tema do dia
+              <select id="dailyTheme">
+                <option>Fé</option><option>Ansiedade</option><option>Propósito</option><option>Liderança</option><option>Relacionamento</option>
+              </select>
+            </label>
+            <button id="generateDailyBtn">Gerar devocional</button>
+            <div id="dailyDevotional" class="bible-text"></div>
+            <button id="playDailyAudioBtn" class="ghost-btn">🎧 Ouvir narração</button>
+          </div>
+
+          <div class="card glass">
+            <h3>🔥 Sequência e Planos</h3>
+            <div class="actions-grid">
+              <label>Plano atual
+                <select id="planSelect">
+                  <option value="7">Plano de 7 dias</option>
+                  <option value="21">Plano de 21 dias</option>
+                  <option value="40">Plano de 40 dias</option>
+                </select>
+              </label>
+              <p class="hint" id="planStatus"></p>
+              <p class="hint">Cancelamentos restantes: <strong id="cancelLeft">5</strong>/5 • ❄️ <strong id="homeFreezes">0</strong></p>
+              <button id="completeTodayBtn">Concluir devocional de hoje (+35 XP / +20 moedas)</button>
+              <button id="cancelMissedBtn" class="ghost-btn">Cancelar dia perdido (ontem)</button>
+              <button id="buyFreezeBtn" class="ghost-btn">Comprar congelamento (100 moedas)</button>
+            </div>
+            <p id="streakStatus" class="hint"></p>
+          </div>
+
+          <div class="card glass">
+            <h3>🏅 Medalhas Espirituais</h3>
+            <div id="medalsWrap" class="hero-badges"></div>
+          </div>
+
+          <div class="card glass">
+            <h3>🛤️ Trilha de devocionais</h3>
+            <div id="devotionalTrail" class="trail"></div>
+            <p id="trailStatus" class="hint"></p>
+          </div>
+        </section>
+
+        <section id="tab-biblia" class="tab">
+          <div class="card glass">
+            <h2>📚 Bíblia Digital</h2>
+            <div class="bible-grid">
+              <label>Livro<select id="bibleBook"></select></label>
+              <label>Capítulo<select id="bibleChapter"></select></label>
+              <label>Verso<select id="bibleVerse"></select></label>
+            </div>
+            <label>Buscar palavra<input id="bibleSearch" type="text" placeholder="Ex: amor, paz" /></label>
+            <button id="searchBibleBtn">Buscar</button>
+            <div id="bibleText" class="bible-text"></div>
+            <div class="actions-grid">
+              <button id="favoriteVerseBtn" class="ghost-btn">⭐ Favoritar verso</button>
+              <button id="shareVerseBtn" class="ghost-btn">📸 Compartilhar verso em imagem</button>
+            </div>
+            <div id="favoriteVerses" class="saved-notes"></div>
+          </div>
+        </section>
+
+        <section id="tab-caderno" class="tab">
+          <div class="card glass notebook-card">
+            <h2>📓 Diário Espiritual</h2>
+            <div class="bible-grid">
+              <label>Cor da folha<select id="noteTheme"><option value="paper-cream">Creme</option><option value="paper-rose">Rosé</option><option value="paper-blue">Azul</option></select></label>
+              <label>Enfeite<select id="noteSticker"><option value="✨">✨</option><option value="🌸">🌸</option><option value="📖">📖</option><option value="🙏">🙏</option></select></label>
+            </div>
+            <textarea id="noteText" rows="8" placeholder="Escreva o que Deus falou com você hoje..."></textarea>
+            <button id="saveNoteBtn">Salvar página</button>
+            <button class="ghost-btn" disabled>Exportar PDF (em breve)</button>
+            <div id="savedNotes" class="saved-notes"></div>
+          </div>
+        </section>
+
+        <section id="tab-ia" class="tab">
+          <div class="card glass">
+            <h2>💬 Devocional Personalizado por IA</h2>
+            <textarea id="chatInput" rows="3" placeholder="Ex: estou ansioso hoje"></textarea>
+            <button id="sendChatBtn">Gerar resposta</button>
+            <div id="chatOutput" class="chat-output"></div>
+          </div>
+
+          <div class="card glass">
+            <h3>🙏 Área de Oração</h3>
+            <input id="prayerInput" type="text" placeholder="Escreva um pedido de oração" />
+            <button id="addPrayerBtn">Adicionar pedido</button>
+            <div id="prayerList" class="saved-notes"></div>
+            <h4>📜 Testemunhos</h4>
+            <div id="testimonyList" class="saved-notes"></div>
+          </div>
+
+          <div class="card glass">
+            <h3>🎧 Áudio / Podcast</h3>
+            <button id="ambientRainBtn" class="ghost-btn">🌧️ Som ambiente: chuva</button>
+            <button id="ambientPianoBtn" class="ghost-btn">🎹 Som ambiente: piano</button>
+            <button id="guidedPrayerBtn" class="ghost-btn">🙏 Oração guiada (áudio)</button>
+          </div>
+        </section>
+
+        <section id="tab-rank" class="tab">
+          <div class="card glass rank-hero">
+            <h2>🏆 Divisão Atual</h2>
+            <p class="rank-big" id="rankName">Bronze</p>
+            <div class="rank-line"><span>XP total</span><strong id="rankXp">0</strong></div>
+            <div class="progress-wrap"><div id="rankProgress" class="progress"></div></div>
+            <p id="rankHint" class="hint"></p>
+          </div>
+          <div class="card glass"><h3>📊 Liga da Semana</h3><div id="leaderboardList" class="leaderboard-list"></div></div>
+        </section>
+
+        <section id="tab-perfil" class="tab">
+          <div class="profile-banner card">
+            <h2 id="profileGreeting">Seu Perfil</h2>
+            <p id="profileSubtitle">Sua jornada espiritual em evolução.</p>
+            <div class="avatar large" id="profileAvatar">🧑</div>
+          </div>
+          <div class="card glass profile-grid">
+            <div><strong id="statDevocionais">0</strong><span>Devocionais</span></div>
+            <div><strong id="statStreak">0</strong><span>Streak</span></div>
+            <div><strong id="statXp">0</strong><span>XP</span></div>
+            <div><strong id="statRank">Bronze</strong><span>Rank</span></div>
+          </div>
+          <div class="card glass">
+            <h3>⏰ Notificação Inteligente</h3>
+            <label>Horário do lembrete<input id="notifyTime" type="time" /></label>
+            <button id="saveNotifyBtn">Salvar horário</button>
+          </div>
+          <div class="card glass">
+            <h3>✍️ Editar perfil</h3>
+            <label>Nome <input id="profileName" type="text" /></label>
+            <label>Bio <textarea id="profileBio" rows="3"></textarea></label>
+            <label>Avatar<select id="profileAvatarSelect"><option>🧑</option><option>👩</option><option>🧔</option><option>👨‍💻</option><option>👸</option><option>🧠</option></select></label>
+            <button id="saveProfileBtn">Salvar perfil</button>
+          </div>
+          <div class="card glass">
+            <h3>🐾 Editar pet</h3>
+            <label>Nome <input id="petName" type="text" /></label>
+            <label>Espécie<select id="petType"><option value="Cordeiro">Cordeiro</option><option value="Pomba">Pomba</option><option value="Leão">Leão</option><option value="Peixe">Peixe</option></select></label>
+            <label>Acessório <input id="petAccessory" type="text" /></label>
+            <button id="savePetBtn">Salvar pet</button>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav glass six">
+        <button class="nav-btn active" data-tab="inicio">🏠<span>Início</span></button>
+        <button class="nav-btn" data-tab="biblia">📖<span>Bíblia</span></button>
+        <button class="nav-btn" data-tab="caderno">📓<span>Diário</span></button>
+        <button class="nav-btn" data-tab="ia">💬<span>IA</span></button>
+        <button class="nav-btn" data-tab="rank">🏅<span>Rank</span></button>
+        <button class="nav-btn" data-tab="perfil">👤<span>Perfil</span></button>
+      </nav>
+    </div>
+
+    <div id="lessonModal" class="modal hidden">
+      <div class="modal-card">
+        <div class="lesson-top">
+          <strong id="lessonStepLabel">Etapa 1</strong>
+          <button id="closeLessonBtn" class="ghost-btn">✖</button>
+        </div>
+        <h3 id="lessonTitle"></h3>
+        <p id="lessonVerse" class="hint"></p>
+        <div id="lessonVerseStage" class="verse-stage">
+          <p id="lessonVerseText" class="verse-text"></p>
+          <button id="showQuestionBtn">Continuar para pergunta</button>
+        </div>
+        <div id="lessonQuestionWrap" class="hidden">
+          <p id="lessonQuestion"></p>
+          <div id="lessonOptions" class="lesson-options"></div>
+          <p id="lessonFeedback" class="hint"></p>
+        </div>
+        <button id="submitLessonBtn" class="hidden">Confirmar resposta</button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
